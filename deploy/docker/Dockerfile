@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM php:8.3-fpm-bookworm AS builder
+FROM php:8.4-fpm-bookworm AS builder
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
@@ -51,7 +51,7 @@ RUN cp .env.example .env \
     && rm -rf node_modules .env
 
 
-FROM php:8.3-fpm-bookworm AS app
+FROM php:8.4-fpm-bookworm AS app
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     git \

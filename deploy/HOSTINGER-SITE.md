@@ -30,7 +30,7 @@ cd /opt/apps/edully/site
 
 cp deploy/site/.env.example deploy/site/.env
 # editar: APP_KEY, DB_PASSWORD, APP_URL
-# gerar key: docker run --rm php:8.3-cli php -r "echo 'base64:'.base64_encode(random_bytes(32)), PHP_EOL;"
+# gerar key: docker run --rm php:8.4-cli php -r "echo 'base64:'.base64_encode(random_bytes(32)), PHP_EOL;"
 
 cd deploy/site
 docker compose up -d --build
