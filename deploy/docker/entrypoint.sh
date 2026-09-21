@@ -1,0 +1,22 @@
+#!/bin/sh
+set -e
+
+cd /var/www/html
+
+mkdir -p storage/framework/{cache,sessions,views} storage/logs bootstrap/cache storage/app/public
+chown -R www-data:www-data storage bootstrap/cache
+chmod -R ug+rwx storage bootstrap/cache
+
+php artisan storage:link --force || true
+
+if [ -n "$APP_KEY" ]; then
+    php artisan config:cache || true
+    php artisan route:cache || true
+    php artisan view:cache || true
+fi
+
+if [ "${RUN_MIGRATIONS:-false}" = "true" ]; then
+    php artisan migrate --force
+fi
+
+exec "$@"

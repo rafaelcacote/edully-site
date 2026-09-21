@@ -1,0 +1,257 @@
+@import 'tailwindcss' source(none);
+
+@source '../views/site';
+@source '../js/site.js';
+
+/*
+| Design tokens da landing pública, derivados dos gradientes da logo:
+| azul (estrutura/confiança), laranja (ação), verde (progresso), amarelo (destaque).
+*/
+@theme {
+    --font-sans:
+        'Instrument Sans', ui-sans-serif, system-ui, sans-serif,
+        'Apple Color Emoji', 'Segoe UI Emoji';
+
+    --color-brand-50: #eaf4fc;
+    --color-brand-100: #d0e7f8;
+    --color-brand-200: #a3cff1;
+    --color-brand-300: #6bb2e8;
+    --color-brand-400: #098eda;
+    --color-brand-500: #056fbd;
+    --color-brand-600: #0063b5;
+    --color-brand-700: #005bad;
+    --color-brand-800: #004a8c;
+    --color-brand-900: #00355f;
+
+    --color-action-50: #fff3ea;
+    --color-action-100: #ffe1cc;
+    --color-action-300: #fdad6a;
+    --color-action-400: #f97c05;
+    --color-action-500: #f6580a;
+    --color-action-600: #e93605;
+    --color-action-700: #c22c04;
+
+    --color-grow-50: #eef8ea;
+    --color-grow-100: #d8f0cf;
+    --color-grow-400: #92c735;
+    --color-grow-500: #3dae4a;
+    --color-grow-600: #2f8c3b;
+    --color-grow-700: #256f2f;
+
+    --color-sun-100: #fff4d1;
+    --color-sun-400: #fec21b;
+    --color-sun-500: #fcac17;
+
+    --color-ink-50: #f7f9fc;
+    --color-ink-100: #eef2f8;
+    --color-ink-200: #dde4ef;
+    --color-ink-300: #bcc7da;
+    --color-ink-400: #8a99b3;
+    --color-ink-500: #5e6d87;
+    --color-ink-600: #445069;
+    --color-ink-700: #2f3950;
+    --color-ink-800: #1d2438;
+    --color-ink-900: #111726;
+
+    --shadow-soft: 0 1px 2px rgb(17 23 38 / 0.04), 0 8px 24px -12px rgb(17 23 38 / 0.12);
+    --shadow-lift: 0 2px 4px rgb(17 23 38 / 0.04), 0 24px 48px -20px rgb(17 23 38 / 0.22);
+    --shadow-glow: 0 18px 40px -16px rgb(5 111 189 / 0.55);
+
+    --animate-float: float 7s ease-in-out infinite;
+    --animate-logo-glow: logo-glow 8s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes logo-glow {
+    0%,
+    100% {
+        opacity: 0.85;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.06);
+    }
+}
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 6rem;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+        @apply bg-white font-sans text-ink-700 antialiased;
+        text-rendering: optimizeLegibility;
+    }
+
+    :focus-visible {
+        @apply outline-2 outline-offset-2 outline-brand-500;
+    }
+
+    ::selection {
+        @apply bg-brand-100 text-brand-900;
+    }
+}
+
+@layer components {
+    .shell {
+        @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+    }
+
+    .section {
+        @apply py-20 sm:py-28;
+    }
+
+    .eyebrow {
+        @apply inline-flex items-center gap-2 rounded-full border border-brand-100 bg-brand-50 px-3 py-1 text-xs font-semibold tracking-wide text-brand-700 uppercase;
+    }
+
+    .h1 {
+        @apply text-4xl leading-[1.08] font-semibold tracking-tight text-ink-900 sm:text-5xl lg:text-6xl;
+    }
+
+    .h2 {
+        @apply text-3xl leading-tight font-semibold tracking-tight text-ink-900 sm:text-4xl;
+    }
+
+    .h3 {
+        @apply text-lg font-semibold tracking-tight text-ink-900;
+    }
+
+    .lead {
+        @apply text-lg leading-relaxed text-ink-500 sm:text-xl;
+    }
+
+    .text-gradient {
+        @apply bg-gradient-to-r from-brand-700 via-brand-500 to-brand-400 bg-clip-text text-transparent;
+    }
+
+    /* Base compartilhada dos botões: agrupada porque o Tailwind v4 não permite
+       aplicar uma classe de componente dentro de outra via @apply. */
+    .btn,
+    .btn-primary,
+    .btn-secondary,
+    .btn-brand,
+    .btn-ghost {
+        @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold transition-all duration-200 select-none;
+    }
+
+    .btn-primary {
+        @apply bg-gradient-to-br from-action-400 to-action-600 text-white shadow-[0_16px_32px_-14px_rgb(233_54_5/0.65)] hover:-translate-y-0.5 hover:shadow-[0_20px_40px_-14px_rgb(233_54_5/0.7)] active:translate-y-0;
+    }
+
+    .btn-secondary {
+        @apply border border-ink-200 bg-white text-ink-800 hover:-translate-y-0.5 hover:border-brand-300 hover:text-brand-700;
+    }
+
+    .btn-brand {
+        @apply bg-gradient-to-br from-brand-500 to-brand-700 text-white shadow-glow hover:-translate-y-0.5;
+    }
+
+    .btn-ghost {
+        @apply px-3 py-2 text-ink-600 hover:bg-ink-100 hover:text-ink-900;
+    }
+
+    .card,
+    .card-hover {
+        @apply rounded-2xl border border-ink-200/80 bg-white p-6 shadow-soft transition-all duration-300;
+    }
+
+    .card-hover {
+        @apply hover:-translate-y-1 hover:border-brand-200 hover:shadow-lift;
+    }
+
+    .icon-tile {
+        @apply mb-4 grid size-11 place-items-center rounded-xl text-white;
+    }
+
+    /* Moldura de mockup usada nas provas visuais do produto. */
+    .frame {
+        @apply overflow-hidden rounded-2xl border border-ink-200 bg-white shadow-lift;
+    }
+
+    .frame-bar {
+        @apply flex items-center gap-1.5 border-b border-ink-200 bg-ink-50 px-4 py-3;
+    }
+
+    .frame-dot {
+        @apply size-2.5 rounded-full bg-ink-300;
+    }
+
+    .phone {
+        @apply relative mx-auto w-[280px] rounded-[2.5rem] border-[10px] border-ink-900 bg-white shadow-lift;
+    }
+
+    .mesh {
+        background-image:
+            radial-gradient(42rem 24rem at 12% -8%, var(--color-brand-100) 0%, transparent 60%),
+            radial-gradient(34rem 20rem at 96% 4%, var(--color-action-100) 0%, transparent 62%),
+            radial-gradient(30rem 22rem at 70% 96%, var(--color-grow-100) 0%, transparent 65%);
+    }
+
+    .grid-lines {
+        background-image:
+            linear-gradient(to right, rgb(17 23 38 / 0.045) 1px, transparent 1px),
+            linear-gradient(to bottom, rgb(17 23 38 / 0.045) 1px, transparent 1px);
+        background-size: 44px 44px;
+        mask-image: radial-gradient(60rem 34rem at 50% 0%, #000 0%, transparent 78%);
+    }
+
+    .reveal {
+        @apply translate-y-4 opacity-0 transition-all duration-700 ease-out;
+    }
+
+    .reveal.is-visible {
+        @apply translate-y-0 opacity-100;
+    }
+}
+
+/* Slider da calculadora de preço. */
+.range {
+    @apply h-2 w-full cursor-pointer appearance-none rounded-full bg-ink-200;
+    background-image: linear-gradient(to right, var(--color-brand-500), var(--color-brand-400));
+    background-repeat: no-repeat;
+}
+
+.range::-webkit-slider-thumb {
+    @apply size-6 appearance-none rounded-full border-[3px] border-white bg-brand-600 shadow-glow;
+}
+
+.range::-moz-range-thumb {
+    @apply size-6 rounded-full border-[3px] border-white bg-brand-600;
+}
+
+/* Acordeão do FAQ com <details> nativo. */
+.faq-item[open] .faq-chevron {
+    @apply rotate-180;
+}
+
+.animate-logo-glow {
+    animation: var(--animate-logo-glow);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .reveal {
+        @apply translate-y-0 opacity-100 transition-none;
+    }
+
+    .animate-float,
+    .animate-logo-glow {
+        animation: none;
+    }
+}

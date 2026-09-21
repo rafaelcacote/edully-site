@@ -1,0 +1,26 @@
+# Build context = raiz do repositório
+node_modules
+vendor
+.git
+.gitignore
+.vscode
+.cursor
+.idea
+.env
+.env.*
+!.env.example
+*.md
+!deploy/**/*.md
+storage/logs/*
+storage/framework/cache/data/*
+storage/framework/sessions/*
+storage/framework/views/*
+bootstrap/cache/*.php
+phpunit.xml
+tests
+snippets
+Homestead.json
+Homestead.yaml
+auth.json
+.DS_Store
+npm-debug.*
