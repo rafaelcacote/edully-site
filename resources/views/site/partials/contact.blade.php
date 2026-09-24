@@ -50,14 +50,30 @@
                     @endforeach
                 </ul>
 
-                @if ($contact['email'])
-                    <p class="mt-8 text-sm text-ink-400">
-                        Prefere e-mail?
-                        <a href="mailto:{{ $contact['email'] }}" class="font-semibold text-white underline decoration-brand-400 decoration-2 underline-offset-4">
-                            {{ $contact['email'] }}
-                        </a>
-                    </p>
-                @endif
+                <div class="mt-8 space-y-2 text-sm text-ink-400">
+                    @if ($contact['email'])
+                        <p>
+                            Prefere e-mail?
+                            <a href="mailto:{{ $contact['email'] }}" class="font-semibold text-white underline decoration-brand-400 decoration-2 underline-offset-4">
+                                {{ $contact['email'] }}
+                            </a>
+                        </p>
+                    @endif
+
+                    @if (filled($contact['whatsapp'] ?? null))
+                        <p>
+                            Prefere WhatsApp?
+                            <a
+                                href="https://wa.me/{{ preg_replace('/\D+/', '', $contact['whatsapp']) }}"
+                                class="font-semibold text-white underline decoration-brand-400 decoration-2 underline-offset-4"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                Falar no WhatsApp
+                            </a>
+                        </p>
+                    @endif
+                </div>
             </div>
 
             <div class="reveal" style="transition-delay: 100ms">

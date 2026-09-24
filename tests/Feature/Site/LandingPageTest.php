@@ -2,7 +2,9 @@
 
 namespace Tests\Feature\Site;
 
+use App\Mail\LeadReceived;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Mail;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
@@ -15,6 +17,7 @@ class LandingPageTest extends TestCase
         parent::setUp();
 
         $this->withoutVite();
+        Mail::fake();
     }
 
     public function test_renders_the_public_sales_page(): void
@@ -26,6 +29,8 @@ class LandingPageTest extends TestCase
         $response->assertSee('Agenda digital online', false);
         $response->assertSee('Funcionalidades', false);
         $response->assertSee('Agendar demonstração', false);
+        $response->assertSee('contato@agendaedully.com.br', false);
+        $response->assertDontSee('comercial@agendaedully.com.br', false);
     }
 
     public function test_shows_the_per_student_price_on_the_sales_page(): void
@@ -62,6 +67,11 @@ class LandingPageTest extends TestCase
             'origem' => 'landing',
             'status' => 'novo',
         ]);
+
+        Mail::assertSent(LeadReceived::class, function (LeadReceived $mail) {
+            return $mail->lead->email === 'maria@colegioaurora.com.br'
+                && $mail->hasTo(config('edully.contact.notify_email'));
+        });
     }
 
     public function test_rejects_a_lead_without_the_required_fields(): void

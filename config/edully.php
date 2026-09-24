@@ -47,8 +47,13 @@ return [
     */
 
     'contact' => [
-        'email' => env('EDULLY_CONTACT_EMAIL', 'comercial@agendaedully.com.br'),
+        'email' => env('EDULLY_CONTACT_EMAIL', 'contato@agendaedully.com.br'),
+        // Número com DDI, só dígitos — ex.: 5591999999999 (vira link wa.me).
         'whatsapp' => env('EDULLY_CONTACT_WHATSAPP'),
+        // URL completa ou @usuario — ex.: https://instagram.com/edully ou @edully.
+        'instagram' => env('EDULLY_CONTACT_INSTAGRAM'),
+        // Destino dos avisos de novo lead (padrão = e-mail de contato).
+        'notify_email' => env('EDULLY_LEAD_NOTIFY_EMAIL', 'contato@agendaedully.com.br'),
     ],
 
     /*
