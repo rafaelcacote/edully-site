@@ -61,15 +61,21 @@
                     @endif
 
                     @if (filled($contact['whatsapp'] ?? null))
+                        @php
+                            $whatsappDigits = preg_replace('/\D+/', '', (string) $contact['whatsapp']);
+                            $whatsappLabel = preg_match('/^55(\d{2})(\d{5})(\d{4})$/', $whatsappDigits, $parts)
+                                ? "({$parts[1]}) {$parts[2]}-{$parts[3]}"
+                                : $whatsappDigits;
+                        @endphp
                         <p>
                             Prefere WhatsApp?
                             <a
-                                href="https://wa.me/{{ preg_replace('/\D+/', '', $contact['whatsapp']) }}"
+                                href="https://wa.me/{{ $whatsappDigits }}"
                                 class="font-semibold text-white underline decoration-brand-400 decoration-2 underline-offset-4"
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                Falar no WhatsApp
+                                {{ $whatsappLabel }}
                             </a>
                         </p>
                     @endif

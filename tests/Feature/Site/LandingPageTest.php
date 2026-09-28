@@ -30,6 +30,8 @@ class LandingPageTest extends TestCase
         $response->assertSee('Funcionalidades', false);
         $response->assertSee('Agendar demonstração', false);
         $response->assertSee('contato@agendaedully.com.br', false);
+        $response->assertSee('(92) 99274-5921', false);
+        $response->assertSee('https://wa.me/5592992745921', false);
         $response->assertDontSee('comercial@agendaedully.com.br', false);
     }
 
